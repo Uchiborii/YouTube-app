@@ -3,7 +3,7 @@ import "./Navbar.css"
 
 const Navbar = () => {
   return (
-    <nav>YouTube分析</nav>
+    <nav>Youtube Analytics</nav>
   )
 }
 

@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
+
 nav {
-  background-color: rgb(113, 99, 84);
+  font-family: 'Sacramento', cursive;
+  background-color: #43565E;
   color: white;
   height: 65px;
   font-weight: 600;

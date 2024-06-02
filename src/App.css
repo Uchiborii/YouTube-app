@@ -1,30 +1,83 @@
-.searchBar {
+.column-header {
   display: flex;
-  justify-content: center;
-  margin: 20px;
+  align-items: center;
 }
 
-.searchBar input {
-  width: 300px;
-  padding: 10px;
-  margin-right: 10px;
+.column-header span {
+  cursor: pointer;
+  margin-left: 8px; /* アイコンとタイトルの間にスペースを追加 */
 }
 
-.searchBar button {
-  padding: 10px;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 18px;
+  text-align: left;
 }
 
-.videoCardContainer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+table th {
+  white-space: nowrap; /* テーブルヘッダーの改行を禁止 */
+  text-align: center;
 }
 
-.videoCard {
-  width: 300px;
-  margin: 10px;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+table th, table td {
+  padding: 12px 15px;
+  border-right: 1px solid #727171;
+}
+
+table th span {
+  display: block; /* 改行されないようにブロック要素として表示 */
+}
+
+table thead tr {
+  background-color: #43565E;
+  color: white;
+  text-align: left;
+}
+
+table tbody tr {
+  border-bottom: 1px solid #727171;
+}
+
+table tbody tr:nth-of-type(even) {
+  color: #f3f3f3;
+}
+
+table tbody tr:last-of-type {
+  border-bottom: 2px solid #43565E;
+}
+
+table {
+  border: 1px solid #ddd; /* 縦線追加 */
+}
+
+form {
+  padding-bottom: 10px;
+  padding-top: 25px;
+  text-align: center;
+}
+
+form input[type="text"] {
+  padding: 13px;
+  font-size: 14px;
+  margin-right: 15px;
+  width: 500px
+}
+
+form button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #FFA23E;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #43565E;
+}
+
+.channelName {
+  font-size: 20px;
 }
