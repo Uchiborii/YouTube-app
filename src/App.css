@@ -8,6 +8,16 @@
   margin-left: 8px; /* アイコンとタイトルの間にスペースを追加 */
 }
 
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  text-align: center;
+  font-size: 2rem;
+}
+
+
 table {
   width: 100%;
   border-collapse: collapse;

@@ -64,15 +64,15 @@ function App() {
       },
       {
         Header: '再生数',
-        accessor: 'statistics.viewCount'
+        accessor: (row) => parseInt(row.statistics.viewCount, 10) // 数値に変換
       },
       {
         Header: 'いいね数',
-        accessor: 'statistics.likeCount'
+        accessor: (row) => parseInt(row.statistics.likeCount, 10) // 数値に変換
       },
       {
         Header: 'コメント数',
-        accessor: 'statistics.commentCount'
+        accessor: (row) => parseInt(row.statistics.commentCount, 10) // 数値に変換
       }
     ],
     []
@@ -97,39 +97,37 @@ function App() {
           <button type="submit">検索</button>
         </form>
         {loading ? (
-          <h1>ロード中・・・</h1>
+          <h1 className="loading">ロード中・・・</h1>
         ) : (
           <>
-          <div className="channel-name">
-            <span>【チャンネル名】</span>
+            <div className="channel-name">
+              <span>【チャンネル名】</span>
               <span className="channelName">{videoData.length > 0 ? videoData[0].snippet.channelTitle : ''}</span>
             </div>
             <table {...getTableProps()}>
-            <thead>
-              {headerGroups.map((headerGroup) => (
-                <tr {...headerGroup.getHeaderGroupProps()}>
-                  {headerGroup.headers.map((column) => (
-                    <th key={column.id}>
-                      <div className="column-header">
-                        {column.id === 'snippet.title' || column.id === 'snippet.thumbnails.default.url'
-                          ? column.render('Header')
-                          : (
-                            <>
-                              {column.render('Header')}
-                              <span onClick={() => column.toggleSortBy(!column.isSortedDesc, true)}>
-                                {column.isSortedDesc ? ' ↓' : ' ↑'}
-                              </span>
-                            </>
-                          )
-                        }
-                      </div>
-                    </th>
-                  ))}
-                </tr>
-              ))}
-            </thead>
-
-
+              <thead>
+                {headerGroups.map((headerGroup) => (
+                  <tr {...headerGroup.getHeaderGroupProps()}>
+                    {headerGroup.headers.map((column) => (
+                      <th {...column.getHeaderProps(column.getSortByToggleProps())} key={column.id}>
+                        <div className="column-header">
+                          {column.id === 'snippet.title' || column.id === 'snippet.thumbnails.default.url'
+                            ? column.render('Header')
+                            : (
+                              <>
+                                {column.render('Header')}
+                                <span onClick={() => column.toggleSortBy(!column.isSortedDesc, true)}>
+                                  {column.isSortedDesc ? ' ↓' : ' ↑'}
+                                </span>
+                              </>
+                            )
+                          }
+                        </div>
+                      </th>
+                    ))}
+                  </tr>
+                ))}
+              </thead>
               <tbody {...getTableBodyProps()}>
                 {rows.map(row => {
                   prepareRow(row);
