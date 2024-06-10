@@ -24,6 +24,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [videoData, setVideoData] = useState([]);
 
+  //入力された値を取得
   const handleInputChange = (e) => {
     setQuery(e.target.value);
   };
@@ -64,15 +65,15 @@ function App() {
       },
       {
         Header: '再生数',
-        accessor: (row) => parseInt(row.statistics.viewCount, 10) // 数値に変換
+        accessor: 'statistics.viewCount'
       },
       {
         Header: 'いいね数',
-        accessor: (row) => parseInt(row.statistics.likeCount, 10) // 数値に変換
+        accessor: 'statistics.likeCount'
       },
       {
         Header: 'コメント数',
-        accessor: (row) => parseInt(row.statistics.commentCount, 10) // 数値に変換
+        accessor: 'statistics.commentCount'
       }
     ],
     []
