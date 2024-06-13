@@ -19,7 +19,7 @@ const getVideoDetails = (apiKey, videoId) => {
 };
 
 function App() {
-  const apiKey = process.env.youtubeApikey;
+  const apiKey = process.env.YOUTUBE1_API;
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [videoData, setVideoData] = useState([]);
