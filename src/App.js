@@ -19,7 +19,7 @@ const getVideoDetails = (apiKey, videoId) => {
 };
 
 function App() {
-  const apiKey = "AIzaSyCDW5UfEtz5ZDobKBxx9Qji12_Q-O8gu2Y";
+  const apiKey = process.env.youtubeApikey;
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [videoData, setVideoData] = useState([]);
@@ -94,7 +94,7 @@ function App() {
       <Navbar />
       <div className="App">
         <form onSubmit={handleSubmit}>
-          <input type="text" value={query} onChange={handleInputChange} placeholder="チャンネルURL" />
+          <input type="text" value={query} onChange={handleInputChange} placeholder="入力" />
           <button type="submit">検索</button>
         </form>
         {loading ? (
