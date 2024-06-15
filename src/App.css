@@ -91,3 +91,8 @@ form button:hover {
 .channelName {
   font-size: 20px;
 }
+
+.custom-title{
+  color: white;
+  text-decoration: none;
+}

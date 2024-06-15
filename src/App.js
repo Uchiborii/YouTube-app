@@ -20,12 +20,12 @@ const getVideoDetails = (apiKey, videoId) => {
 
 function App() {
   const apiKey = process.env.REACT_APP_YOUTUBE_API;
-  console.log("APIキー：" + apiKey)
+
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [videoData, setVideoData] = useState([]);
 
-  //入力された値を取得
+  // 入力された値を取得
   const handleInputChange = (e) => {
     setQuery(e.target.value);
   };
@@ -62,7 +62,12 @@ function App() {
       },
       {
         Header: 'タイトル',
-        accessor: 'snippet.title'
+        accessor: 'snippet.title',
+        Cell: ({ row, cell: { value } }) => (
+          <a href={`https://www.youtube.com/watch?v=${row.original.id}`} target="_blank" rel="noopener noreferrer" className="custom-title">
+            {value}
+          </a>
+        )
       },
       {
         Header: '再生数',
@@ -113,17 +118,14 @@ function App() {
                     {headerGroup.headers.map((column) => (
                       <th {...column.getHeaderProps(column.getSortByToggleProps())} key={column.id}>
                         <div className="column-header">
-                          {column.id === 'snippet.title' || column.id === 'snippet.thumbnails.default.url'
-                            ? column.render('Header')
-                            : (
-                              <>
-                                {column.render('Header')}
-                                <span onClick={() => column.toggleSortBy(!column.isSortedDesc, true)}>
-                                  {column.isSortedDesc ? ' ↓' : ' ↑'}
-                                </span>
-                              </>
-                            )
-                          }
+                          {column.render('Header')}
+                          <span>
+                            {column.isSorted
+                              ? column.isSortedDesc
+                                ? ' 🔼'
+                                : ' 🔽'
+                              : ''}
+                          </span>
                         </div>
                       </th>
                     ))}
