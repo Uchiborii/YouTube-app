@@ -99,7 +99,7 @@ function App() {
       <Navbar />
       <div className="App">
         <form onSubmit={handleSubmit}>
-          <input type="text" value={query} onChange={handleInputChange} placeholder="入力" />
+          <input type="text" value={query} onChange={handleInputChange} placeholder="キーワード入力" />
           <button type="submit">検索</button>
         </form>
         {loading ? (
