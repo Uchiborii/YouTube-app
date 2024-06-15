@@ -20,7 +20,6 @@ const getVideoDetails = (apiKey, videoId) => {
 
 function App() {
   const apiKey = process.env.REACT_APP_YOUTUBE_API;
-
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [videoData, setVideoData] = useState([]);
