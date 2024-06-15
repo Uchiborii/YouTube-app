@@ -106,10 +106,6 @@ function App() {
           <h1 className="loading">ロード中・・・</h1>
         ) : (
           <>
-            <div className="channel-name">
-              <span>【チャンネル名】</span>
-              <span className="channelName">{videoData.length > 0 ? videoData[0].snippet.channelTitle : ''}</span>
-            </div>
             <table {...getTableProps()}>
               <thead>
                 {headerGroups.map((headerGroup) => (
