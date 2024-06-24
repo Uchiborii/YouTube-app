@@ -1,56 +1,17 @@
 import React, { useState, useMemo } from 'react';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
+import YoutubeData from './components/YoutubeData/YoutubeData';
+import Sort from './components/Sort/Sort';
+import DisplayData from './components/DisplayData/DisplayData';
 import { useTable, useSortBy, useFilters } from 'react-table';
 
-// YouTube APIの関数を定義
-const getAllVideos = (apiKey, query, maxResults = 20) => {
-  const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&maxResults=${maxResults}&key=${apiKey}`;
-  return fetch(url)
-    .then(res => res.json())
-    .then(data => data.items);
-};
-
-const getVideoDetails = (apiKey, videoId) => {
-  const url = `https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails,statistics&id=${videoId}&key=${apiKey}`;
-  return fetch(url)
-    .then(res => res.json())
-    .then(data => data.items[0]);
-};
 
 function App() {
-  const apiKey = process.env.REACT_APP_YOUTUBE_API;
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [videoData, setVideoData] = useState([]);
 
-  // 入力された値を取得
-  const handleInputChange = (e) => {
-    setQuery(e.target.value);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      const res = await getAllVideos(apiKey, query);
-      await loadVideoData(res);
-      setLoading(false);
-    } catch (error) {
-      console.error("Error fetching video data:", error);
-      setLoading(false);
-    }
-  };
-
-  const loadVideoData = async (data) => {
-    let _videoData = await Promise.all(
-      data.map(async (video) => {
-        let videoDetails = await getVideoDetails(apiKey, video.id.videoId);
-        return videoDetails;
-      })
-    );
-    setVideoData(_videoData);
-  };
 
   const columns = useMemo(
     () => [
@@ -87,7 +48,6 @@ function App() {
   const data = useMemo(() => videoData, [videoData]);
 
   const {
-    getTableProps,
     getTableBodyProps,
     headerGroups,
     rows,
@@ -98,48 +58,23 @@ function App() {
     <>
       <Navbar />
       <div className="App">
-        <form onSubmit={handleSubmit}>
-          <input type="text" value={query} onChange={handleInputChange} placeholder="キーワード入力" />
-          <button type="submit">検索</button>
-        </form>
+        <YoutubeData
+          query={query}
+          setQuery={setQuery}
+          setLoading={setLoading}
+          setVideoData={setVideoData}
+        />
+
         {loading ? (
           <h1 className="loading">ロード中・・・</h1>
         ) : (
           <>
-            <table {...getTableProps()}>
-              <thead>
-                {headerGroups.map((headerGroup) => (
-                  <tr {...headerGroup.getHeaderGroupProps()}>
-                    {headerGroup.headers.map((column) => (
-                      <th {...column.getHeaderProps(column.getSortByToggleProps())} key={column.id}>
-                        <div className="column-header">
-                          {column.render('Header')}
-                          <span>
-                            {column.isSorted
-                              ? column.isSortedDesc
-                                ? ' 🔼'
-                                : ' 🔽'
-                              : ''}
-                          </span>
-                        </div>
-                      </th>
-                    ))}
-                  </tr>
-                ))}
-              </thead>
-              <tbody {...getTableBodyProps()}>
-                {rows.map(row => {
-                  prepareRow(row);
-                  return (
-                    <tr {...row.getRowProps()}>
-                      {row.cells.map(cell => (
-                        <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                      ))}
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+            <Sort headerGroups={headerGroups} />
+            <DisplayData
+              getTableBodyProps={getTableBodyProps}
+              rows={rows}
+              prepareRow={prepareRow}
+            />
           </>
         )}
       </div>
@@ -147,4 +82,4 @@ function App() {
   );
 }
 
-export default App;
+export default App;				

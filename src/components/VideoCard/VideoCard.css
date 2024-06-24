@@ -1,0 +1,56 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.video-card {
+  max-width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: transform 0.2s ease;
+  overflow: hidden;
+}
+
+.card-img img {
+  width: 100%;
+  border-radius: 8px 8px 0 0;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 8px 0;
+  padding: 0 8px; /* 横方向のパディングを追加 */
+}
+
+.card-info {
+  padding: 0 8px; /* 横方向のパディングを追加 */
+}
+
+.card-data {
+  margin: 4px 0;
+}
+
+.card-horizontal {
+  display: flex;
+  justify-content: space-between; /* 横並びにして間隔を均等に分ける */
+}
+
+.card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.card-link:hover .video-card {
+  transform: scale(1.05);
+}
+
+.like-comment {
+  display: flex;
+  align-items: center;
+}
+
