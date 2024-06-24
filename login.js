@@ -1,3 +1,6 @@
+function login() {
+}
+
 function logout() {
 }
 
